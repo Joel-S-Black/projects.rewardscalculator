@@ -43,19 +43,19 @@ namespace RewardsCalculatorDataLoader
             var date = new DateTime(2020, 1, 1);
             int counter = 1;
 
-            while(date < DateTime.Now)
+            while (date < DateTime.Now)
             {
                 var transactionDate = date.ToShortDateString();
                 Console.WriteLine(transactionDate);
 
                 var random = new Random();
 
-                foreach(var cust in custResults)
+                foreach (var cust in custResults)
                 {
-                    var randomProduct = random.Next(1,results.Count());
-                   // var randomPrice = random.Next(1, counter);
+                    var randomProduct = random.Next(1, results.Count());
+                    var randomPrice = random.Next(1, counter);
                     var actualProduct = results.FirstOrDefault(p => p.ProductId == randomProduct);
-                    Console.WriteLine($"Cust: {cust.CustomerId}, product: {actualProduct?.ProductId} - price: {actualProduct.UnitPrice}");
+                    Console.WriteLine($"Cust: {cust.CustomerId}, product: {actualProduct?.ProductId} - price: {actualProduct.UnitPrice * randomPrice}");
                 }
 
                 counter++;
