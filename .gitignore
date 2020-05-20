@@ -8,3 +8,5 @@
 /RewardsCalculator/RewardsCalculator.Api/obj
 /RewardsCalculator/RewardsCalculatorDataLoader/bin/Debug/netcoreapp3.1
 /RewardsCalculator/RewardsCalculatorDataLoader/obj
+/RewardsCalculator/RewardsCalculator.Api.Tests/bin/Debug/netcoreapp3.1
+/RewardsCalculator/RewardsCalculator.Api.Tests/obj

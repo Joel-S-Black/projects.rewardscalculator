@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RewardsCalculator.Api", "Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RewardsCalculatorDataLoader", "RewardsCalculatorDataLoader\RewardsCalculatorDataLoader.csproj", "{32F6F70A-0C0B-47FC-939B-605098D30477}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RewardsCalculator.Api.Tests", "RewardsCalculator.Api.Tests\RewardsCalculator.Api.Tests.csproj", "{DCDFD9FD-291A-45E3-B581-984C94E2C9C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{32F6F70A-0C0B-47FC-939B-605098D30477}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32F6F70A-0C0B-47FC-939B-605098D30477}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32F6F70A-0C0B-47FC-939B-605098D30477}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCDFD9FD-291A-45E3-B581-984C94E2C9C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCDFD9FD-291A-45E3-B581-984C94E2C9C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCDFD9FD-291A-45E3-B581-984C94E2C9C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCDFD9FD-291A-45E3-B581-984C94E2C9C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
