@@ -1,7 +1,9 @@
 ﻿using Dapper;
 using Microsoft.Data.Sqlite;
 using RewardsCalculator.Api.Data;
+using RewardsCalculator.Api.Models;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.IO;
 using System.Linq;
@@ -43,10 +45,11 @@ namespace RewardsCalculatorDataLoader
             var date = new DateTime(2020, 1, 1);
             int counter = 1;
 
+            var transactions = new List<Transaction>();
+
             while (date < DateTime.Now)
             {
                 var transactionDate = date.ToShortDateString();
-                Console.WriteLine(transactionDate);
 
                 var random = new Random();
 
@@ -55,7 +58,17 @@ namespace RewardsCalculatorDataLoader
                     var randomProduct = random.Next(1, results.Count());
                     var randomPrice = random.Next(1, counter);
                     var actualProduct = results.FirstOrDefault(p => p.ProductId == randomProduct);
-                    Console.WriteLine($"Cust: {cust.CustomerId}, product: {actualProduct?.ProductId} - price: {actualProduct.UnitPrice * randomPrice}");
+                    Console.WriteLine($"Insert into purchases ( customer_id,product_id, amount, purchase_date) Values({cust.CustomerId},{actualProduct.ProductId},{actualProduct.UnitPrice * randomPrice},'{transactionDate}');");
+
+                    var purchase = new Transaction
+                    {
+                        CustomerId = cust.CustomerId,
+                        ProductId = actualProduct.ProductId,
+                        Amount = actualProduct.UnitPrice * randomPrice,
+                        PurchaseDate = date
+                    };
+
+                    transactions.Add(purchase);
                 }
 
                 counter++;
