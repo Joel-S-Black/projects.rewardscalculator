@@ -1,14 +1,49 @@
-﻿using RewardsCalculator.Api.ViewModels;
+﻿using RewardsCalculator.Api.Data;
+using RewardsCalculator.Api.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace RewardsCalculator.Api.Services
 {
     public class RewardsService : IRewardsService
     {
-        public IEnumerable<RewardPointsResult> GetAllRewardsInTimeRange(DateTime now, DateTime dateTime)
+        private readonly ITransactionRepository _transactionData;
+        private readonly IRewardPointsCalculator _calculator;
+        private readonly ICustomerRepository _customerData;
+
+        public RewardsService(ITransactionRepository transactionRepo, IRewardPointsCalculator calculator, ICustomerRepository customerData)
         {
-            throw new NotImplementedException();
+            _transactionData = transactionRepo;
+            _calculator = calculator;
+            _customerData = customerData;
+        }
+        public async Task<IEnumerable<RewardPointsResult>> GetAllRewardsInTimeRange(DateTime endDate, DateTime startDate)
+        {
+            var points = new List<RewardPointsResult>();
+
+            var allTransactions = await _transactionData.GetTransactionInRange(endDate, startDate);
+            var allCustomers = await _customerData.GetAllCustomers();
+
+            var customersInRange = allTransactions.GroupBy(t => t.CustomerId);
+
+            foreach(var cust in customersInRange)
+            {
+                var customer = allCustomers.FirstOrDefault(c => c.CustomerId == cust.Key);
+
+                var customerPoints = new RewardPointsResult
+                {
+                    CustomerId = cust.Key,
+                    FirstName = customer.FirstName,
+                    LastName = customer.LastName,
+                    RewardsPoints = cust.Sum(t => _calculator.CalculatePoints(t))
+                };
+
+                points.Add(customerPoints);
+            }
+
+            return points;
         }
     }
 }
