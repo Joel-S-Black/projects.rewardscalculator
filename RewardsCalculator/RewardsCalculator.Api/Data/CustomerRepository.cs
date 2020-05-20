@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RewardsCalculator.Api.Data
 {
-    public class CustomerRepository
+    public class CustomerRepository: ICustomerRepository
     {
         private readonly string _connectionString;
 
@@ -29,13 +29,13 @@ namespace RewardsCalculator.Api.Data
             }
         }
 
-        public IEnumerable<Customer> GetAllCustomers()
+        public async Task<IEnumerable<Customer>> GetAllCustomers()
         {
             using (var conn = new SqliteConnection(_connectionString))
             {
                 conn.Open();
 
-                var result = conn.Query<Customer>(this.GetAllCustomersSql);
+                var result = await conn.QueryAsync<Customer>(this.GetAllCustomersSql);
 
                 return result;
             }

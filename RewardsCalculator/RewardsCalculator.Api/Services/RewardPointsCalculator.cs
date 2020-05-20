@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RewardsCalculator.Api.Services
 {
-    public class RewardPointsCalculator
+    public class RewardPointsCalculator: IRewardPointsCalculator
     {
         const int lowerThreshold = 50;
         const int lowerThresholdPoints = 1;

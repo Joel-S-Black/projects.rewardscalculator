@@ -2,10 +2,11 @@
 using Microsoft.Data.Sqlite;
 using RewardsCalculator.Api.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace RewardsCalculator.Api.Data
 {
-    public class ProductRepository
+    public class ProductRepository: IProductRepository
     {
         private readonly string _connectionString;
 
@@ -28,13 +29,13 @@ namespace RewardsCalculator.Api.Data
             }
         }
 
-        public IEnumerable<Product> GetAllProducts()
+        public async Task<IEnumerable<Product>> GetAllProducts()
         {
             using (var conn = new SqliteConnection(_connectionString))
             {
                 conn.Open();
 
-                var result = conn.Query<Product>(this.GetAllProductsSql);
+                var result = await conn.QueryAsync<Product>(this.GetAllProductsSql);
 
                 return result;
             }
