@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace RewardsCalculator.Api.Models
+﻿namespace RewardsCalculator.Api.Models
 {
     public class Product
     {
