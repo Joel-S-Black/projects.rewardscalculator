@@ -15,10 +15,10 @@ namespace RewardsCalculator.Api.ViewModels
         public MonthlyRewardPoints(IRewardPointsCalculator calculator, IGrouping<int, Transaction> month)
         {
             MonthName = DateTimeFormatInfo.CurrentInfo.GetMonthName(month.Key);
-            RewardPoints = month.Sum(t => calculator.CalculatePoints(t));
+            PointsEarned = month.Sum(t => calculator.CalculatePoints(t));
         }
 
         public string MonthName { get; set; }
-        public int RewardPoints { get; set; }
+        public int PointsEarned { get; set; }
     }
 }

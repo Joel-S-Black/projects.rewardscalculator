@@ -114,7 +114,7 @@ namespace RewardsCalculator.Api.Tests
             var actual = new RewardPointsResult(customer, transactions, _calculator);
 
             // Assert
-            Assert.AreEqual(actual.TotalRewardsPoints, actual.MonthlyTotals.Sum(t => t.RewardPoints));
+            Assert.AreEqual(actual.TotalRewardsPoints, actual.MonthlyTotals.Sum(t => t.PointsEarned));
         }
     }
 }
