@@ -1,0 +1,61 @@
+{
+	"info": {
+		"_postman_id": "5a2b7dd4-eeb5-494d-b531-7802cf83dd07",
+		"name": "RewardsCalculator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Last 90 Days Customer Rewards (Default)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/rewards/default",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"rewards",
+						"default"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Customers Rewards Custom Date Range",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/rewards/all/byrange?startDate=01/01/2020&endDate=05/19/2020",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"rewards",
+						"all",
+						"byrange"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "01/01/2020"
+						},
+						{
+							"key": "endDate",
+							"value": "05/19/2020"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

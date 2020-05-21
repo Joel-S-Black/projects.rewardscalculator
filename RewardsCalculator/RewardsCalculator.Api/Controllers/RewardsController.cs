@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RewardsCalculator.Api.Services;
 using System;
+using System.Threading.Tasks;
 
 namespace RewardsCalculator.Api.Controllers
 {
-    [Produces("application/json")]
     [Route("rewards")]
-    public class RewardsController:Controller
+    [Produces("application/json")]
+    public class RewardsController:ControllerBase
     {
         private readonly IRewardsService _service;
         public RewardsController(IRewardsService service)
@@ -15,19 +16,19 @@ namespace RewardsCalculator.Api.Controllers
         }
 
         [HttpGet("default")]
-        public IActionResult GetDefaultRewardsForAllCustomers()
+        public async Task<IActionResult> GetDefaultRewardsForAllCustomers()
         {
-            var results = _service.GetAllRewardsInTimeRange(DateTime.Now, DateTime.Now.AddDays(-90));
+            var rewards = await _service.GetAllRewardsInTimeRange(DateTime.Now, DateTime.Now.AddDays(-90));
 
-            return Ok(results);
+            return Ok(rewards);
         }
 
         [HttpGet("all/byrange")]
-        public IActionResult GetRewardsByDatesForAllCustomers(DateTime startDate, DateTime endDate)
+        public async Task<IActionResult> GetRewardsByDatesForAllCustomers([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
         {
-            var results = _service.GetAllRewardsInTimeRange(endDate, startDate);
+            var rewards = await _service.GetAllRewardsInTimeRange(endDate, startDate);
 
-            return Ok(results);
+            return Ok(rewards);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.Options;
 using RewardsCalculator.Api.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,11 +9,11 @@ namespace RewardsCalculator.Api.Data
 {
     public class ProductRepository: IProductRepository
     {
-        private readonly string _connectionString;
+        private readonly ConnectionString _connectionString;
 
-        public ProductRepository(string connectionString)
+        public ProductRepository(IOptions<ConnectionString> connectionString)
         {
-            _connectionString = connectionString;
+            _connectionString = connectionString.Value;
         }
 
         public string GetAllProductsSql
@@ -31,7 +32,7 @@ namespace RewardsCalculator.Api.Data
 
         public async Task<IEnumerable<Product>> GetAllProducts()
         {
-            using (var conn = new SqliteConnection(_connectionString))
+            using (var conn = new SqliteConnection(_connectionString.Value))
             {
                 conn.Open();
 

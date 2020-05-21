@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.Options;
 using RewardsCalculator.Api.Models;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,11 @@ namespace RewardsCalculator.Api.Data
 {
     public class TransactionRepository : ITransactionRepository
     {
-        private readonly string _connectionString;
+        private readonly ConnectionString _connectionString;
 
-        public TransactionRepository(string connectionString)
+        public TransactionRepository(IOptions<ConnectionString> connectionString)
         {
-            _connectionString = connectionString;
+            _connectionString = connectionString.Value;
         }
 
         private string GetTransactionsInRangeSql
@@ -34,7 +35,7 @@ namespace RewardsCalculator.Api.Data
 
         public async Task<IEnumerable<Transaction>> GetTransactionInRange(DateTime endDate, DateTime startDate)
         {
-            using(var conn = new SqliteConnection(_connectionString))
+            using(var conn = new SqliteConnection(_connectionString.Value))
             {
                 conn.Open();
 

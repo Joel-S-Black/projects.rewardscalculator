@@ -43,7 +43,7 @@ namespace RewardsCalculator.Api.Services
                 points.Add(customerPoints);
             }
 
-            return points;
+            return points.OrderBy(p => p.CustomerId);
         }
     }
 }
