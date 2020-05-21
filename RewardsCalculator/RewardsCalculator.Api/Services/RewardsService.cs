@@ -32,15 +32,7 @@ namespace RewardsCalculator.Api.Services
             {
                 var customer = allCustomers.FirstOrDefault(c => c.CustomerId == cust.Key);
 
-                var customerPoints = new RewardPointsResult
-                {
-                    CustomerId = cust.Key,
-                    FirstName = customer.FirstName,
-                    LastName = customer.LastName,
-                    RewardsPoints = cust.Sum(t => _calculator.CalculatePoints(t))
-                };
-
-                points.Add(customerPoints);
+                points.Add(new RewardPointsResult(customer, cust, _calculator));
             }
 
             return points.OrderBy(p => p.CustomerId);

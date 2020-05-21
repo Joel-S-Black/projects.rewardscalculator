@@ -65,7 +65,7 @@ namespace RewardsCalculator.Api.Tests
             var actual = await _testObject.GetAllRewardsInTimeRange(new DateTime(2020, 5, 6), new DateTime(2020, 4, 3));
 
             // Assert
-            Assert.AreEqual(expectedRewards, actual.FirstOrDefault().RewardsPoints);
+            Assert.AreEqual(expectedRewards, actual.FirstOrDefault().TotalRewardsPoints);
         }
 
         [Test]
@@ -109,7 +109,7 @@ namespace RewardsCalculator.Api.Tests
             var actual = await _testObject.GetAllRewardsInTimeRange(new DateTime(2020, 5, 6), new DateTime(2020, 4, 3));
 
             // Assert
-            Assert.AreEqual(expectedRewards, actual.FirstOrDefault().RewardsPoints);
+            Assert.AreEqual(expectedRewards, actual.FirstOrDefault().TotalRewardsPoints);
         }
     }
 }
